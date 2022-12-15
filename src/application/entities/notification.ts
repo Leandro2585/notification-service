@@ -1,3 +1,4 @@
+import { randomUUID } from 'node:crypto';
 import { Replace } from 'src/helpers';
 import { Content } from './content';
 
@@ -10,12 +11,19 @@ export type NotificationParams = {
 };
 
 export class Notification {
+  private _id: string;
   private params: NotificationParams;
+
   constructor(params: Replace<NotificationParams, { created_at?: Date }>) {
+    this._id = randomUUID();
     this.params = {
       ...params,
       created_at: params.created_at ?? new Date(),
     };
+  }
+
+  public get id() {
+    return this._id;
   }
 
   public set content(content: Content) {
