@@ -1,7 +1,8 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller } from '@nestjs/common';
 import { Body, Post } from '@nestjs/common/decorators';
-import { SendNotification } from 'src/application/usecases';
-import { CreateNotificationDTO } from '../dtos/create-notification-dto';
+import { SendNotification } from '@application/usecases';
+import { CreateNotificationDTO } from '@infra/http/dtos';
+import { NotificationMapper } from '@helpers/mappers';
 
 @Controller('notifications')
 export class NotificationsController {
@@ -10,6 +11,6 @@ export class NotificationsController {
   @Post()
   async create(@Body() dto: CreateNotificationDTO) {
     const { notification } = await this.sendNotification.execute(dto);
-    return { notification };
+    return { notification: NotificationMapper.toHTTP(notification) };
   }
 }
