@@ -17,6 +17,7 @@ module.exports = {
   ignorePatterns: ['.eslintrc.js'],
   rules: {
     'quotes': [2, 'single', 'avoid-escape'],
+    'dangle': 'off',
     '@typescript-eslint/no-namespace': 'off',
     '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',

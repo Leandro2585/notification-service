@@ -7,6 +7,9 @@ import { Injectable } from '@nestjs/common';
 @Injectable()
 export class PrismaNotificationsRepository implements NotificationsRepository {
   constructor(private prismaService: PrismaService) {}
+  async findById(notification_id: string) {}
+
+  async save(notification: Notification): Promise<void> {}
 
   async create(notification: Notification): Promise<void> {
     const raw = NotificationMapper.toPrisma(notification);

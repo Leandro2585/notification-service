@@ -7,6 +7,7 @@ export type NotificationParams = {
   content: Content;
   category: string;
   read_at?: Date | null;
+  canceled_at?: Date | null;
   created_at: Date;
 };
 
@@ -58,7 +59,15 @@ export class Notification {
     return this.params.read_at;
   }
 
+  public cancel() {
+    this.params.canceled_at = new Date();
+  }
+
+  public get canceled_at(): Date | null | undefined {
+    return this.params.canceled_at;
+  }
+
   public get created_at(): Date {
-    return this.created_at;
+    return this.params.created_at;
   }
 }
