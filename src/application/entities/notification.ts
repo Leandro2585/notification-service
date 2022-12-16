@@ -15,8 +15,11 @@ export class Notification {
   private _id: string;
   private params: NotificationParams;
 
-  constructor(params: Replace<NotificationParams, { created_at?: Date }>) {
-    this._id = randomUUID();
+  constructor(
+    params: Replace<NotificationParams, { created_at?: Date }>,
+    id?: string
+  ) {
+    this._id = id ?? randomUUID();
     this.params = {
       ...params,
       created_at: params.created_at ?? new Date(),
