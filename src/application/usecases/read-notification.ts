@@ -3,25 +3,24 @@ import { NotificationsRepository } from '@application/repositories';
 import { NotificationNotFound } from '@application/errors';
 
 @Injectable()
-export class CancelNotification {
+export class ReadNotification {
   constructor(private notificationsRepository: NotificationsRepository) {}
 
-  async execute(
-    input: CancelNotification.Input
-  ): Promise<CancelNotification.Output> {
-    const { notification_id } = input;
+  async execute({
+    notification_id,
+  }: ReadNotification.Input): Promise<ReadNotification.Output> {
     const notification = await this.notificationsRepository.findById(
       notification_id
     );
     if (!notification) {
       throw new NotificationNotFound();
     }
-    notification.cancel();
+    notification.read();
     await this.notificationsRepository.save(notification);
   }
 }
 
-export namespace CancelNotification {
+export namespace ReadNotification {
   export type Input = {
     notification_id: string;
   };

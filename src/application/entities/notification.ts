@@ -51,8 +51,12 @@ export class Notification {
     return this.params.category;
   }
 
-  public set read_at(read_at: Date | null | undefined) {
-    this.params.read_at = read_at;
+  public read() {
+    this.params.read_at = new Date();
+  }
+
+  public unread() {
+    this.params.read_at = null;
   }
 
   public get read_at() {
